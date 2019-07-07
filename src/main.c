@@ -19,7 +19,7 @@
 
 unsigned char already_started=false;
 
-void (*consetup)() = screen_init;
+char _conname[] = "con_2x1a0x0";
 char _prog_name[] = "platoterm";
 long (*_cmdchannels)() = NULL;
 long (*_stackchannels)() = NULL;
@@ -35,6 +35,7 @@ void greeting(void)
 
 void main(void)
 {
+  screen_init();
   greeting();
   touch_init();
   terminal_init();

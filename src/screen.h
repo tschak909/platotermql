@@ -16,7 +16,7 @@
 /**
  * screen_init() - Set up the screen
  */
-void screen_init(chanid_t console_channel);
+void screen_init(void);
 
 /**
  * screen_splash - Show splash screen

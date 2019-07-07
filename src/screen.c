@@ -15,7 +15,7 @@
 #include "protocol.h"
 
 chanid_t win;
-
+WINDOWDEF_t windetails={0x00,0x00,0x00,0x01,511,255,0,0};
 unsigned char CharWide=8;
 unsigned char CharHigh=16;
 padPt TTYLoc;
@@ -25,9 +25,11 @@ padPt TTYLoc;
 /**
  * screen_init() - Set up the screen
  */
-void screen_init(chanid_t console_channel)
+void screen_init(void)
 {
-  
+  win=ut_scr(&windetails);
+  sd_clear(win,0);
+  sd_iline(win,0,0,0,100,100);  
 }
 
 /**
