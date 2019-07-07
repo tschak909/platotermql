@@ -7,6 +7,7 @@
  * plato.c - main program
  */
 
+#include <stdlib.h>
 #include "terminal.h"
 #include "screen.h"
 #include "touch.h"
@@ -17,6 +18,11 @@
 #define false 0
 
 unsigned char already_started=false;
+
+void (*consetup)() = screen_init;
+char _prog_name[] = "platoterm";
+long (*_cmdchannels)() = NULL;
+long (*_stackchannels)() = NULL;
 
 /**
  * greeting(void) - Show terminal greeting
@@ -29,7 +35,7 @@ void greeting(void)
 
 void main(void)
 {
-  screen_init();
+  greeting();
   touch_init();
   terminal_init();
   io_init();

@@ -10,12 +10,13 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+#include <qdos.h>
 #include "protocol.h"
 
 /**
  * screen_init() - Set up the screen
  */
-void screen_init(void);
+void screen_init(chanid_t console_channel);
 
 /**
  * screen_splash - Show splash screen

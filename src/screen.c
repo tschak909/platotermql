@@ -10,18 +10,24 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+#include <qdos.h>
+#include "splash.h"
 #include "protocol.h"
+
+chanid_t win;
 
 unsigned char CharWide=8;
 unsigned char CharHigh=16;
 padPt TTYLoc;
 
 
+
 /**
  * screen_init() - Set up the screen
  */
-void screen_init(void)
+void screen_init(chanid_t console_channel)
 {
+  
 }
 
 /**
@@ -29,6 +35,7 @@ void screen_init(void)
  */
 void screen_splash(void)
 {
+  ShowPLATO(splash,sizeof(splash));
 }
 
 /**
@@ -57,6 +64,7 @@ void screen_beep(void)
  */
 void screen_clear(void)
 {
+  sd_clear(win,0);
 }
 
 /**
@@ -86,6 +94,7 @@ void screen_dot_draw(padPt* Coord)
  */
 void screen_line_draw(padPt* Coord1, padPt* Coord2)
 {
+  sd_iline(win,0,Coord1->x,Coord1->y,Coord2->x,Coord2->y);
 }
 
 /**
