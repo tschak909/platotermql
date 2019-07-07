@@ -28,8 +28,9 @@ padPt TTYLoc;
 void screen_init(void)
 {
   win=ut_scr(&windetails);
-  sd_clear(win,0);
-  sd_iline(win,0,0,0,100,100);  
+  sd_setin(win,-1,1);
+  sd_clear(win,-1);
+  sd_iline(win,-1,0,0,100,100);  
 }
 
 /**
@@ -66,7 +67,7 @@ void screen_beep(void)
  */
 void screen_clear(void)
 {
-  sd_clear(win,0);
+  sd_clear(win,-1);
 }
 
 /**
@@ -96,7 +97,7 @@ void screen_dot_draw(padPt* Coord)
  */
 void screen_line_draw(padPt* Coord1, padPt* Coord2)
 {
-  sd_iline(win,0,Coord1->x,Coord1->y,Coord2->x,Coord2->y);
+  sd_iline(win,-1,Coord1->x,Coord1->y,Coord2->x,Coord2->y);
 }
 
 /**
