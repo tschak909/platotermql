@@ -20,7 +20,7 @@ short len;
  */
 void io_init(void)
 {
-  mt_baud(9600);
+  mt_baud(1200);
   ser=io_open("SER",0);
 }
 
@@ -38,13 +38,15 @@ void io_send_byte(unsigned char b)
 void io_main(void)
 {
   char ch;
-  padByte pb;
-  if (io_pend(ser,0)==0)
+
+  while (io_pend(ser,0)==0)
     {
       io_fbyte(ser,-1,&ch);
-      pb=ch;
-      ShowPLATO(&pb,1);
+      buff[len++]=ch;
     }
+  
+  ShowPLATO(buff,len);
+  len=0;
 }
 
 /**
