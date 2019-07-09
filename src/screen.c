@@ -17,9 +17,7 @@
 #include "splash.h"
 #include "protocol.h"
 #include "font.h"
-
-#define X_SCALE 0.29
-#define Y_SCALE 0.1953125
+#include "scale.h"
 
 extern padBool FastText; /* protocol.c */
 extern padPt TTYLoc;
@@ -31,15 +29,6 @@ padPt TTYLoc;
 
 unsigned char current_background=0;
 unsigned char current_foreground=3;
-
-/**
- * screen_convert_coord(Coord) - scale coordinates.
- */
-void screen_convert_coord(padPt* coord)
-{
-  coord->x=ceil(coord->x*X_SCALE);
-  coord->y=ceil(coord->y*Y_SCALE);
-}
 
 /**
  * screen_splash - Show splash screen
@@ -103,6 +92,7 @@ void screen_set_pen_mode(void)
  */
 void screen_block_draw(padPt* Coord1, padPt* Coord2)
 {
+  
 }
 
 /**
@@ -110,6 +100,10 @@ void screen_block_draw(padPt* Coord1, padPt* Coord2)
  */
 void screen_dot_draw(padPt* Coord)
 {
+  sd_point(win,
+	   0,
+	   scalex[Coord->x],
+	   scalex[Coord->y]);
 }
 
 /**
@@ -119,10 +113,10 @@ void screen_line_draw(padPt* Coord1, padPt* Coord2)
 {
   sd_line(win,
 	  0,
-	  (Coord1->x)*X_SCALE,
-	  (Coord1->y)*Y_SCALE,
-	  (Coord2->x)*X_SCALE,
-	  (Coord2->y)*Y_SCALE);
+	  scalex[Coord1->x],
+	  scaley[Coord1->y],
+	  scalex[Coord2->x],
+	  scaley[Coord2->y]);
 }
 
 /**
@@ -130,15 +124,46 @@ void screen_line_draw(padPt* Coord1, padPt* Coord2)
  */
 void screen_char_draw(padPt* Coord, unsigned char* ch, unsigned char count)
 {
-  sd_setsz(win,0,1,0);
+  int offset=16;
+
+  switch (CurMode)
+    {
+    case ModeWrite:
+      sd_setmd(win,-1,DM_OR);
+      sd_setpa(win,-1,0);
+      sd_setin(win,-1,7);
+      break;
+    case ModeRewrite:
+      sd_setmd(win,-1,DM_OVER);
+      sd_setpa(win,-1,0);
+      sd_setin(win,-1,7);
+      break;
+    case ModeErase:
+      sd_setmd(win,-1,DM_OR);
+      sd_setpa(win,-1,0);
+      sd_setin(win,-1,0);
+      break;
+    case ModeInverse:
+      sd_setmd(win,-1,DM_OVER);
+      sd_setpa(win,-1,7);
+      sd_setin(win,-1,0);
+      break;
+    }
+  
+  if (ModeBold)
+    {
+      offset=32;
+      sd_setsz(win,0,3,1);
+    }
+  else
+    sd_setsz(win,0,1,0);
   sd_gcur(win,
   	  0,
-  	  (double)0.0,
-  	  (double)0.0,
-  	  (double)(Coord->y+16)*Y_SCALE,
-  	  (double)Coord->x*X_SCALE);
+  	  0.0,
+  	  0.0,
+  	  scaley[Coord->y+offset],
+  	  scalex[Coord->x]);
 
-  
   io_sstrg(win,
   	   0,
   	   ch,

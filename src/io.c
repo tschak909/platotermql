@@ -41,7 +41,7 @@ void io_main(void)
   padByte pb;
   if (io_pend(ser,0)==0)
     {
-      io_fbyte(ser,0,&ch);
+      io_fbyte(ser,-1,&ch);
       pb=ch;
       ShowPLATO(&pb,1);
     }
