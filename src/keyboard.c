@@ -7,7 +7,12 @@
  * keyboard.c - Keyboard functions
  */
 
+#include <qdos.h>
+#include "protocol.h"
 #include "keyboard.h"
+#include "io.h"
+
+extern chanid_t win;
 
 /**
  * keyboard_out - If platoKey < 0x7f, pass off to protocol
@@ -24,6 +29,14 @@ void keyboard_out(unsigned char platoKey)
  */
 void keyboard_main(void)
 {
+  char ch;
+  if (io_pend(win,0)==0)
+    {
+      io_fbyte(win,0,&ch);
+      if (ch==0x0a)
+	ch=0x0d;
+      io_send_byte(ch);
+    }
 }
 
 /**

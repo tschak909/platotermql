@@ -7,13 +7,21 @@
  * io.h - Input/output functions (serial/ethernet)
  */
 
+#include <qdos.h>
 #include "io.h"
+#include "protocol.h"
+
+chanid_t ser;
+padByte buff[8192];
+short len;
 
 /**
  * io_init() - Set-up the I/O
  */
 void io_init(void)
 {
+  mt_baud(9600);
+  ser=io_open("SER",0);
 }
 
 /**
@@ -21,6 +29,7 @@ void io_init(void)
  */
 void io_send_byte(unsigned char b)
 {
+  io_sbyte(ser,0,b);
 }
 
 /**
@@ -28,6 +37,17 @@ void io_send_byte(unsigned char b)
  */
 void io_main(void)
 {
+  char ch;
+  while (io_pend(ser,0))
+    {
+      io_fbyte(ser,0,&ch);
+      buff[len++]=ch;
+    }
+  if (len>0)
+    {
+      ShowPLATO(buff,len);
+      len=0;
+    }
 }
 
 /**

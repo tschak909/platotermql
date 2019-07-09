@@ -8,6 +8,7 @@
  */
 
 #include <stdlib.h>
+#include <qdos.h>
 #include "terminal.h"
 #include "screen.h"
 #include "touch.h"
@@ -17,9 +18,10 @@
 #define true 1
 #define false 0
 
+extern chanid_t win;
 unsigned char already_started=false;
 
-char _conname[] = "con_2x1a0x0";
+char* _conname = NULL;
 char _prog_name[] = "platoterm";
 long (*_cmdchannels)() = NULL;
 long (*_stackchannels)() = NULL;
@@ -36,7 +38,6 @@ void greeting(void)
 void main(void)
 {
   screen_init();
-  greeting();
   touch_init();
   terminal_init();
   io_init();

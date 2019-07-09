@@ -24,6 +24,11 @@ void screen_init(void);
 void screen_splash(void);
 
 /**
+ * screen_splash - Show splash screen
+ */
+void screen_splash(void);
+
+/**
  * screen_load_driver()
  * Load the TGI driver
  */
