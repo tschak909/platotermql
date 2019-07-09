@@ -38,15 +38,12 @@ void io_send_byte(unsigned char b)
 void io_main(void)
 {
   char ch;
-  while (io_pend(ser,0))
+  padByte pb;
+  if (io_pend(ser,0)==0)
     {
       io_fbyte(ser,0,&ch);
-      buff[len++]=ch;
-    }
-  if (len>0)
-    {
-      ShowPLATO(buff,len);
-      len=0;
+      pb=ch;
+      ShowPLATO(&pb,1);
     }
 }
 

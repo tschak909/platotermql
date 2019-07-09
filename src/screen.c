@@ -56,8 +56,8 @@ void screen_init(void)
 {
   char hello[5]="Hello";
   win=io_open("CON_512x256a0x0",0);
-  sd_setin(win,-1,7);
-  sd_clear(win,-1);
+  sd_setin(win,0,7);
+  sd_clear(win,0);
   screen_splash();
 }
 
@@ -87,7 +87,7 @@ void screen_beep(void)
  */
 void screen_clear(void)
 {
-  sd_clear(win,-1);
+  sd_clear(win,0);
 }
 
 /**
@@ -118,7 +118,7 @@ void screen_dot_draw(padPt* Coord)
 void screen_line_draw(padPt* Coord1, padPt* Coord2)
 {
   sd_line(win,
-	  -1,
+	  0,
 	  (Coord1->x)*X_SCALE,
 	  (Coord1->y)*Y_SCALE,
 	  (Coord2->x)*X_SCALE,
@@ -130,9 +130,9 @@ void screen_line_draw(padPt* Coord1, padPt* Coord2)
  */
 void screen_char_draw(padPt* Coord, unsigned char* ch, unsigned char count)
 {
-  sd_setsz(win,-1,1,0);
+  sd_setsz(win,0,1,0);
   sd_gcur(win,
-  	  -1,
+  	  0,
   	  (double)0.0,
   	  (double)0.0,
   	  (double)(Coord->y+16)*Y_SCALE,
@@ -140,7 +140,7 @@ void screen_char_draw(padPt* Coord, unsigned char* ch, unsigned char count)
 
   
   io_sstrg(win,
-  	   -1,
+  	   0,
   	   ch,
   	   count);
 }
@@ -150,7 +150,7 @@ void screen_char_draw(padPt* Coord, unsigned char* ch, unsigned char count)
  */
 void screen_tty_char(padByte theChar)
 {
-  io_sbyte(win,-1,theChar);
+  io_sbyte(win,0,theChar);
 }
 
 /**
