@@ -30,9 +30,10 @@ void keyboard_out(unsigned char platoKey)
 void keyboard_main(void)
 {
   char ch;
-  if (io_pend(win,0)==0)
+  int ret;
+  ret=io_fbyte(win,0,&ch);
+  if (ret==0)
     {
-      io_fbyte(win,0,&ch);
       if (ch==0x0a)
 	ch=0x0d;
       io_send_byte(ch);
