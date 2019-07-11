@@ -43,8 +43,12 @@ void screen_splash(void)
  */
 void screen_init(void)
 {
+  int ret;
   char hello[5]="Hello";
   win=io_open("CON_512x256a0x0",0);
+
+  ret=sd_fount(win,-1,(char*)font,(char*)font);
+
   sd_setin(win,0,7);
   sd_clear(win,0);
   screen_splash();
@@ -69,6 +73,7 @@ void screen_wait(void)
  */
 void screen_beep(void)
 {
+  beep(110,10);
 }
 
 /**
@@ -85,6 +90,20 @@ void screen_clear(void)
  */
 void screen_set_pen_mode(void)
 {
+  if (CurMode==ModeErase || CurMode==ModeInverse)
+    {
+      sd_setin(win,-1,0);
+      sd_setpa(win,-1,7);
+      sd_setst(win,-1,7);
+      sd_setmd(win,-1,DM_OVER);
+    }
+  else
+    {
+      sd_setin(win,-1,7);
+      sd_setpa(win,-1,0);
+      sd_setst(win,-1,0);
+      sd_setmd(win,-1,DM_OVER);
+    }
 }
 
 /**
@@ -92,7 +111,21 @@ void screen_set_pen_mode(void)
  */
 void screen_block_draw(padPt* Coord1, padPt* Coord2)
 {
+  QLRECT_t r;
+  colour_t c;
+
+  screen_set_pen_mode();
+  if (CurMode==ModeInverse || CurMode==ModeErase)
+    c=0;
+  else
+    c=7;
+
+  r.q_x=min(scalex[Coord1->x],scalex[Coord2->x]);
+  r.q_y=min(scaley[Coord1->y],scalex[Coord2->y]);
+  r.q_width=max(scalex[(Coord2->x-Coord1->x)], scalex[Coord1->x-Coord2->x]);
+  r.q_height=max(scaley[(Coord2->y-Coord1->x)], scaley[Coord2->y-Coord1->y]);
   
+  sd_fill(win,-1,c,&r);
 }
 
 /**
@@ -100,6 +133,7 @@ void screen_block_draw(padPt* Coord1, padPt* Coord2)
  */
 void screen_dot_draw(padPt* Coord)
 {
+  screen_set_pen_mode();
   sd_point(win,
 	   0,
 	   scalex[Coord->x],
@@ -111,6 +145,7 @@ void screen_dot_draw(padPt* Coord)
  */
 void screen_line_draw(padPt* Coord1, padPt* Coord2)
 {
+  screen_set_pen_mode();
   sd_line(win,
 	  0,
 	  scalex[Coord1->x],
@@ -124,8 +159,30 @@ void screen_line_draw(padPt* Coord1, padPt* Coord2)
  */
 void screen_char_draw(padPt* Coord, unsigned char* ch, unsigned char count)
 {
-  int offset=16;
-
+  int i;
+  int y_offset=16;
+  char offset;
+ 
+  switch (CurMem)
+    {
+    case M0:
+      sd_fount(win,-1,(char*)font,(char*)font);
+      offset=0;
+      break;
+    case M1:
+      sd_fount(win,-1,(char*)font,(char*)font);
+      offset=96;
+      break;
+    case M2:
+      offset=-32;
+      break;
+    case M3:
+      offset=32;
+      break;
+    }
+  
+  // Temporary: use m0/m1 font, todo, implement m2/m3
+  
   switch (CurMode)
     {
     case ModeWrite:
@@ -157,13 +214,17 @@ void screen_char_draw(padPt* Coord, unsigned char* ch, unsigned char count)
     }
   else
     sd_setsz(win,0,1,0);
+
   sd_gcur(win,
   	  0,
   	  0.0,
   	  0.0,
-  	  scaley[Coord->y+offset],
+  	  scaley[Coord->y+y_offset],
   	  scalex[Coord->x]);
-
+  
+  for (i=0;i<count;++i)
+    ch[i]+=offset;
+  
   io_sstrg(win,
   	   0,
   	   ch,
@@ -198,6 +259,7 @@ void screen_background(padRGB* theColor)
  */
 void screen_paint(padPt* Coord)
 {
+  /* TODO */
 }
 
 /**
@@ -206,6 +268,7 @@ void screen_paint(padPt* Coord)
  */
 void screen_done(void)
 {
+  /* TODO */
 }
 
 #endif /* SCREEN_H */
