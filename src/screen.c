@@ -21,6 +21,7 @@
 
 extern padBool FastText; /* protocol.c */
 extern padPt TTYLoc;
+extern unsigned char fontm23[1154];
 
 chanid_t win;
 unsigned char CharWide=8;
@@ -50,6 +51,10 @@ void screen_init(void)
   sd_setin(win,0,7);
   sd_clear(win,0);
   screen_splash();
+
+  // Initialize fontm23. 
+  fontm23[0]=0x00;
+  fontm23[1]=0x7f;
 }
 
 /**
@@ -178,14 +183,14 @@ void screen_char_draw(padPt* Coord, unsigned char* ch, unsigned char count)
       offset=96;
       break;
     case M2:
+      sd_fount(win,-1,(char*)fontm23,(char*)fontm23);
       offset=-32;
       break;
     case M3:
+      sd_fount(win,-1,(char*)fontm23,(char*)fontm23);
       offset=32;
       break;
     }
-  
-  // Temporary: use m0/m1 font, todo, implement m2/m3
   
   switch (CurMode)
     {

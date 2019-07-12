@@ -9,7 +9,7 @@
 
 /* Some functions are intentionally stubbed. */
 #pragma warn(unused-param, off)
-
+#include <string.h>
 #include "terminal.h"
 #include "screen.h"
 
@@ -24,6 +24,15 @@
 #define true 1
 #define false 0
 
+static unsigned char char_data[]={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+				  0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+
+static unsigned char curr_word;   // current word
+static unsigned char u;
+
+static unsigned char BTAB[]={0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01}; // flip one bit on (OR)
+
+unsigned char fontm23[1154];
 
 /**
  * protocol.c externals
@@ -224,4 +233,27 @@ void terminal_ext_out(padByte value)
  */
 void terminal_char_load(padWord charnum, charData theChar)
 {
+  memset(char_data,0,sizeof(char_data));
+  
+  // load and transpose character data into 8x16 array  
+  for (curr_word=0;curr_word<8;curr_word++)
+    {
+      for (u=16; u-->0; )
+	{
+	  if (theChar[curr_word] & 1<<u)
+	    {
+	      char_data[u^0x0F&0x0F]|=BTAB[curr_word];
+	    }
+	}
+    }
+
+  // OR pixel rows together
+  fontm23[((charnum*9)+2)+0]=char_data[0]|char_data[1];
+  fontm23[((charnum*9)+2)+1]=char_data[2]|char_data[3];
+  fontm23[((charnum*9)+2)+2]=char_data[4]|char_data[5];
+  fontm23[((charnum*9)+2)+3]=char_data[6]|char_data[7];
+  fontm23[((charnum*9)+2)+4]=char_data[8]|char_data[9];
+  fontm23[((charnum*9)+2)+5]=char_data[10]|char_data[11];
+  fontm23[((charnum*9)+2)+6]=char_data[12]|char_data[13];
+  fontm23[((charnum*9)+2)+7]=char_data[14]|char_data[15];
 }
