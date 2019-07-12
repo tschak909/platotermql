@@ -25,7 +25,7 @@ unsigned char key_to_pkey[]={
     PKEY_DIVIDE, /* 0x07 CTRL-G */
     PKEY_ERASE, /* 0x08 CTRL-H */
     PKEY_HELP, /* 0x09 CTRL-I */
-    PKEY_NOKEY, /* 0x0a CTRL-J */
+    PKEY_NEXT, /* 0x0a CTRL-J */
     PKEY_NOKEY, /* 0x0b CTRL-K */
     PKEY_LAB, /* 0x0c CTRL-L */
     PKEY_NEXT, /* 0x0d CTRL-M */

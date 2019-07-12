@@ -46,7 +46,7 @@ void screen_init(void)
 {
   int ret;
   char hello[5]="Hello";
-  win=io_open("CON_512x256a0x0",0);
+  win=io_open("CON_512x256a0x0_128",0);
 
   sd_setin(win,0,7);
   sd_clear(win,0);

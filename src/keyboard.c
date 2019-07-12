@@ -42,22 +42,19 @@ void keyboard_out(unsigned char platoKey)
  */
 void keyboard_main(void)
 {
-  char ch;
+  unsigned char ch;
   int ret;
-  char buff[8];
 
-  if (io_pend(win,0)==0)
+  ret=io_fbyte(win,0,&ch);
+
+  if (ret==0)
     {
-      ret=io_fbyte(win,0,&ch);
-      
-      if (ret==0)
-	{
-	  if (TTY)
-	    keyboard_out_tty(ch);
-	  else
-	    keyboard_out(key_to_pkey[ch]);
-	}
+      if (TTY)
+	keyboard_out_tty(ch);
+      else
+	keyboard_out(key_to_pkey[ch]);
     }
+  
 }
 
 /**
