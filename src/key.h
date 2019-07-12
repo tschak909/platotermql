@@ -3,7 +3,7 @@
  * Keyboard Translation Tables
  */
 
-#include "../plato_key.h"
+#include "plato_key.h"
 
 #ifndef KEY_H
 #define KEY_H
@@ -42,7 +42,7 @@ unsigned char key_to_pkey[]={
     PKEY_MULTIPLY, /* 0x18 CTRL-X */
     PKEY_SUB, /* 0x19 CTRL-Y */
     PKEY_NOKEY, /* 0x1a CTRL-Z */
-    PKEY_NOKEY, /* 0x1b ESC */
+    PKEY_ASSIGN, /* 0x1b ESC */
     PKEY_NOKEY, /* 0x1c */
     PKEY_NOKEY, /* 0x1d */
     PKEY_NOKEY, /* 0x1e */
@@ -143,267 +143,142 @@ unsigned char key_to_pkey[]={
     PKEY_RIGHT_CURLY_BRACE, /* 0x7d } */
     PKEY_TILDE, /* 0x7e ~ */
     PKEY_ERASE, /* 0x7f DEL */
-};
 
-unsigned char shift_key_to_pkey[]={
-    PKEY_NOKEY, /* 0x00 NUL */
-    PKEY_ANS, /* 0x01 CTRL-A */
-    PKEY_BACK, /* 0x02 CTRL-B */
-    PKEY_COPY, /* 0x03 CTRL-C */
-    PKEY_DATA, /* 0x04 CTRL-D */
-    PKEY_EDIT, /* 0x05 CTRL-E */
-    PKEY_FONT, /* 0x06 CTRL-F */
-    PKEY_DIVIDE, /* 0x07 CTRL-G */
-    PKEY_ERASE, /* 0x08 CTRL-H */
-    PKEY_HELP, /* 0x09 CTRL-I */
-    PKEY_NOKEY, /* 0x0a CTRL-J */
-    PKEY_NOKEY, /* 0x0b CTRL-K */
-    PKEY_LAB, /* 0x0c CTRL-L */
-    PKEY_NEXT, /* 0x0d CTRL-M */
-    PKEY_NEXT, /* 0x0e CTRL-N */
-    PKEY_NOKEY, /* 0x0f CTRL-O */
-    PKEY_SUPER, /* 0x10 CTRL-P */
-    PKEY_SQUARE, /* 0x11 CTRL-Q */
-    PKEY_ERASE, /* 0x12 CTRL-R */
-    PKEY_STOP, /* 0x13 CTRL-S */
-    PKEY_TERM, /* 0x14 CTRL-T */
-    PKEY_NOKEY, /* 0x15 CTRL-U */
-    PKEY_NOKEY, /* 0x16 CTRL-V */
-    PKEY_NOKEY, /* 0x17 CTRL-W */
-    PKEY_MULTIPLY, /* 0x18 CTRL-X */
-    PKEY_SUB, /* 0x19 CTRL-Y */
-    PKEY_NOKEY, /* 0x1a CTRL-Z */
-    PKEY_NOKEY, /* 0x1b ESC */
-    PKEY_NOKEY, /* 0x1c */
-    PKEY_NOKEY, /* 0x1d */
-    PKEY_NOKEY, /* 0x1e */
-    PKEY_NOKEY, /* 0x1f */
-    PKEY_SPACE, /* 0x20 SPACE */
-    PKEY_EXCLAMATION, /* 0x21 ! */
-    PKEY_QUOTE, /* 0x22 " */
-    PKEY_POUND, /* 0x23 # */
-    PKEY_DOLLAR, /* 0x24 $ */
-    PKEY_PERCENT, /* 0x25 % */
-    PKEY_AMPERSAND, /* 0x26 & */
-    PKEY_APOSTROPHE, /* 0x27 ' */
-    PKEY_PARENTHESIS_LEFT, /* 0x28 ( */
-    PKEY_PARENTHESIS_RIGHT, /* 0x29 ) */
-    PKEY_ASTERISK, /* 0x2a * */
-    PKEY_PLUS, /* 0x2b + */
-    PKEY_COMMA, /* 0x2c , */
-    PKEY_MINUS, /* 0x2d - */
-    PKEY_PERIOD, /* 0x2e . */
-    PKEY_SLASH, /* 0x2f / */
-    PKEY_0, /* 0x30 0 */
-    PKEY_1, /* 0x31 1 */
-    PKEY_2, /* 0x32 2 */
-    PKEY_3, /* 0x33 3 */
-    PKEY_4, /* 0x34 4 */
-    PKEY_5, /* 0x35 5 */
-    PKEY_6, /* 0x36 6 */
-    PKEY_7, /* 0x37 7 */
-    PKEY_8, /* 0x38 8 */
-    PKEY_9, /* 0x39 9 */
-    PKEY_COLON, /* 0x3a : */
-    PKEY_SEMICOLON, /* 0x3b ; */
-    PKEY_LESS_THAN, /* 0x3c < */
-    PKEY_EQUALS, /* 0x3d = */
-    PKEY_GREATER_THAN, /* 0x3e > */
-    PKEY_QUESTION_MARK, /* 0x3f ? */
-    PKEY_AT, /* 0x40 @ */
-    PKEY_a, /* 0x41 A */
-    PKEY_b, /* 0x42 B */
-    PKEY_c, /* 0x43 C */
-    PKEY_d, /* 0x44 D */
-    PKEY_e, /* 0x45 E */
-    PKEY_f, /* 0x46 F */
-    PKEY_g, /* 0x47 G */
-    PKEY_h, /* 0x48 H */
-    PKEY_i, /* 0x49 I */
-    PKEY_j, /* 0x4a J */
-    PKEY_k, /* 0x4b K */
-    PKEY_l, /* 0x4c L */
-    PKEY_m, /* 0x4d M */
-    PKEY_n, /* 0x4e N */
-    PKEY_o, /* 0x4f O */
-    PKEY_p, /* 0x50 P */
-    PKEY_q, /* 0x51 Q */
-    PKEY_r, /* 0x52 R */
-    PKEY_s, /* 0x53 S */
-    PKEY_t, /* 0x54 T */
-    PKEY_u, /* 0x55 U */
-    PKEY_v, /* 0x56 V */
-    PKEY_w, /* 0x57 W */
-    PKEY_x, /* 0x58 X */
-    PKEY_y, /* 0x59 Y */
-    PKEY_z, /* 0x5a Z */
-    PKEY_BRACKET_LEFT, /* 0x5b [ */
-    PKEY_SLASH, /* 0x5c / */
-    PKEY_BRACKET_RIGHT, /* 0x5d ] */
-    PKEY_CIRCUMFLEX, /* 0x5e ^ */
-    PKEY_UNDERSCORE, /* 0x5f _ */
-    PKEY_GRAVE, /* 0x60 ` */
-    PKEY_A, /* 0x61 a */
-    PKEY_B, /* 0x62 b */
-    PKEY_C, /* 0x63 c */
-    PKEY_D, /* 0x64 d */
-    PKEY_E, /* 0x65 e */
-    PKEY_F, /* 0x66 f */
-    PKEY_G, /* 0x67 g */
-    PKEY_H, /* 0x68 h */
-    PKEY_I, /* 0x69 i */
-    PKEY_J, /* 0x6a j */
-    PKEY_K, /* 0x6b k */
-    PKEY_L, /* 0x6c l */
-    PKEY_M, /* 0x6d m */
-    PKEY_N, /* 0x6e n */
-    PKEY_O, /* 0x6f o */
-    PKEY_P, /* 0x70 p */
-    PKEY_Q, /* 0x71 q */
-    PKEY_R, /* 0x72 r */
-    PKEY_S, /* 0x73 s */
-    PKEY_T, /* 0x74 t */
-    PKEY_U, /* 0x75 u */
-    PKEY_V, /* 0x76 v */
-    PKEY_W, /* 0x77 w */
-    PKEY_X, /* 0x78 x */
-    PKEY_Y, /* 0x79 y */
-    PKEY_Z, /* 0x7a z */
-    PKEY_LEFT_CURLY_BRACE, /* 0x7b { */
-    PKEY_BAR, /* 0x7c | */
-    PKEY_RIGHT_CURLY_BRACE, /* 0x7d } */
-    PKEY_TILDE, /* 0x7e ~ */
-    PKEY_ERASE, /* 0x7f DEL */
-};
+    PKEY_NOKEY,                  /* 0x80 CTRL-ESC */
+    PKEY_NOKEY,                  /* 0x81 CTRL-SHIFT-1 */
+    PKEY_NOKEY,                  /* 0x82 CTRL-SHIFT-' */
+    PKEY_NOKEY,                  /* 0x83 CTRL-SHIFT-3 */
+    PKEY_NOKEY,                  /* 0x84 CTRL-SHIFT-4 */
+    PKEY_NOKEY,                  /* 0x85 CTRL-SHIFT-5 */
+    PKEY_NOKEY,                  /* 0x86 CTRL-SHIFT-7 */
+    PKEY_NOKEY,                  /* 0x87 CTRL-' */
+    PKEY_NOKEY,                  /* 0x88 CTRL-SHIFT-9 */
+    PKEY_NOKEY,                  /* 0x89 CTRL-SHIFT-0 */
+    PKEY_NOKEY,                  /* 0x8a CTRL-SHIFT-8 */
+    PKEY_NOKEY,                  /* 0x8b CTRL-SHIFT-= */
+    PKEY_NOKEY,                  /* 0x8c CTRL-, */
+    PKEY_NOKEY,                  /* 0x8d CTRL-_ */
+    PKEY_NOKEY,                  /* 0x8e CTRL-. */
+    PKEY_NOKEY,                  /* 0x8f CTRL-/ */
 
-unsigned char esc_key_to_pkey[]={
-    PKEY_NOKEY, /* 0x00 NUL */
-    PKEY_NOKEY, /* 0x01 CTRL-A */
-    PKEY_BACK1, /* 0x02 CTRL-B */
-    PKEY_COPY1, /* 0x03 CTRL-C */
-    PKEY_DATA1, /* 0x04 CTRL-D */
-    PKEY_EDIT1, /* 0x05 CTRL-E */
-    PKEY_NOKEY, /* 0x06 CTRL-F */
-    PKEY_NOKEY, /* 0x07 CTRL-G */
-    PKEY_HELP1, /* 0x08 CTRL-H */
-    PKEY_NOKEY, /* 0x09 CTRL-I */
-    PKEY_NOKEY, /* 0x0a CTRL-J */
-    PKEY_NOKEY, /* 0x0b CTRL-K */
-    PKEY_LAB1, /* 0x0c CTRL-L */
-    PKEY_NEXT1, /* 0x0d CTRL-M */
-    PKEY_NEXT1, /* 0x0e CTRL-N */
-    PKEY_NOKEY, /* 0x0f CTRL-O */
-    PKEY_SUPER1, /* 0x10 CTRL-P */
-    PKEY_ACCESS, /* 0x11 CTRL-Q */
-    PKEY_ERASE1, /* 0x12 CTRL-R */
-    PKEY_STOP1, /* 0x13 CTRL-S */
-    PKEY_TERM, /* 0x14 CTRL-T */
-    PKEY_NOKEY, /* 0x15 CTRL-U */
-    PKEY_NOKEY, /* 0x16 CTRL-V */
-    PKEY_NOKEY, /* 0x17 CTRL-W */
-    PKEY_NOKEY, /* 0x18 CTRL-X */
-    PKEY_SUB1, /* 0x19 CTRL-Y */
-    PKEY_NOKEY, /* 0x1a CTRL-Z */
-    PKEY_NOKEY, /* 0x1b ESC */
-    PKEY_NOKEY, /* 0x1c */
-    PKEY_NOKEY, /* 0x1d */
-    PKEY_NOKEY, /* 0x1e */
-    PKEY_NOKEY, /* 0x1f */
-    PKEY_NOKEY, /* 0x20 SPACE */
-    PKEY_NOKEY, /* 0x21 ! */
-    PKEY_NOKEY, /* 0x22 " */
-    PKEY_NOKEY, /* 0x23 # */
-    PKEY_NOKEY, /* 0x24 $ */
-    PKEY_NOKEY, /* 0x25 % */
-    PKEY_NOKEY, /* 0x26 & */
-    PKEY_NOKEY, /* 0x27 ' */
-    PKEY_NOKEY, /* 0x28 ( */
-    PKEY_NOKEY, /* 0x29 ) */
-    PKEY_NOKEY, /* 0x2a * */
-    PKEY_NOKEY, /* 0x2b + */
-    PKEY_NOKEY, /* 0x2c , */
-    PKEY_NOKEY, /* 0x2d - */
-    PKEY_NOKEY, /* 0x2e . */
-    PKEY_NOKEY, /* 0x2f / */
-    PKEY_NOKEY, /* 0x30 0 */
-    PKEY_NOKEY, /* 0x31 1 */
-    PKEY_NOKEY, /* 0x32 2 */
-    PKEY_NOKEY, /* 0x33 3 */
-    PKEY_NOKEY, /* 0x34 4 */
-    PKEY_NOKEY, /* 0x35 5 */
-    PKEY_NOKEY, /* 0x36 6 */
-    PKEY_NOKEY, /* 0x37 7 */
-    PKEY_NOKEY, /* 0x38 8 */
-    PKEY_NOKEY, /* 0x39 9 */
-    PKEY_NOKEY, /* 0x3a : */
-    PKEY_NOKEY, /* 0x3b ; */
-    PKEY_NOKEY, /* 0x3c < */
-    PKEY_NOKEY, /* 0x3d = */
-    PKEY_NOKEY, /* 0x3e > */
-    PKEY_NOKEY, /* 0x3f ? */
-    PKEY_NOKEY, /* 0x40 @ */
-    PKEY_NOKEY, /* 0x41 A */
-    PKEY_NOKEY, /* 0x42 B */
-    PKEY_NOKEY, /* 0x43 C */
-    PKEY_NOKEY, /* 0x44 D */
-    PKEY_NOKEY, /* 0x45 E */
-    PKEY_NOKEY, /* 0x46 F */
-    PKEY_NOKEY, /* 0x47 G */
-    PKEY_NOKEY, /* 0x48 H */
-    PKEY_NOKEY, /* 0x49 I */
-    PKEY_NOKEY, /* 0x4a J */
-    PKEY_NOKEY, /* 0x4b K */
-    PKEY_NOKEY, /* 0x4c L */
-    PKEY_NOKEY, /* 0x4d M */
-    PKEY_NOKEY, /* 0x4e N */
-    PKEY_NOKEY, /* 0x4f O */
-    PKEY_NOKEY, /* 0x50 P */
-    PKEY_NOKEY, /* 0x51 Q */
-    PKEY_NOKEY, /* 0x52 R */
-    PKEY_NOKEY, /* 0x53 S */
-    PKEY_NOKEY, /* 0x54 T */
-    PKEY_NOKEY, /* 0x55 U */
-    PKEY_NOKEY, /* 0x56 V */
-    PKEY_NOKEY, /* 0x57 W */
-    PKEY_NOKEY, /* 0x58 X */
-    PKEY_NOKEY, /* 0x59 Y */
-    PKEY_NOKEY, /* 0x5a Z */
-    PKEY_NOKEY, /* 0x5b [ */
-    PKEY_NOKEY, /* 0x5c / */
-    PKEY_NOKEY, /* 0x5d ] */
-    PKEY_NOKEY, /* 0x5e ^ */
-    PKEY_NOKEY, /* 0x5f _ */
-    PKEY_NOKEY, /* 0x60 ` */
-    PKEY_NOKEY, /* 0x61 a */
-    PKEY_NOKEY, /* 0x62 b */
-    PKEY_NOKEY, /* 0x63 c */
-    PKEY_NOKEY, /* 0x64 d */
-    PKEY_NOKEY, /* 0x65 e */
-    PKEY_NOKEY, /* 0x66 f */
-    PKEY_NOKEY, /* 0x67 g */
-    PKEY_NOKEY, /* 0x68 h */
-    PKEY_NOKEY, /* 0x69 i */
-    PKEY_NOKEY, /* 0x6a j */
-    PKEY_NOKEY, /* 0x6b k */
-    PKEY_NOKEY, /* 0x6c l */
-    PKEY_NOKEY, /* 0x6d m */
-    PKEY_NOKEY, /* 0x6e n */
-    PKEY_NOKEY, /* 0x6f o */
-    PKEY_NOKEY, /* 0x70 p */
-    PKEY_NOKEY, /* 0x71 q */
-    PKEY_NOKEY, /* 0x72 r */
-    PKEY_NOKEY, /* 0x73 s */
-    PKEY_NOKEY, /* 0x74 t */
-    PKEY_NOKEY, /* 0x75 u */
-    PKEY_NOKEY, /* 0x76 v */
-    PKEY_NOKEY, /* 0x77 w */
-    PKEY_NOKEY, /* 0x78 x */
-    PKEY_NOKEY, /* 0x79 y */
-    PKEY_NOKEY, /* 0x7a z */
-    PKEY_NOKEY, /* 0x7b { */
-    PKEY_NOKEY, /* 0x7c | */
-    PKEY_NOKEY, /* 0x7d } */
-    PKEY_NOKEY, /* 0x7e ~ */
+    PKEY_NOKEY,                  /* 0x90 CTRL-0 */
+    PKEY_NOKEY,                  /* 0x91 CTRL-1 */
+    PKEY_NOKEY,                  /* 0x92 CTRL-2 */
+    PKEY_NOKEY,                  /* 0x93 CTRL-3 */
+    PKEY_NOKEY,                  /* 0x94 CTRL-4 */
+    PKEY_NOKEY,                  /* 0x95 CTRL-5 */
+    PKEY_NOKEY,                  /* 0x96 CTRL-6 */
+    PKEY_NOKEY,                  /* 0x97 CTRL-7 */
+    PKEY_NOKEY,                  /* 0x98 CTRL-8 */
+    PKEY_NOKEY,                  /* 0x99 CTRL-9 */
+    PKEY_NOKEY,                  /* 0x9a CTRL-SHIFT-; */
+    PKEY_NOKEY,                  /* 0x9b CTRL-; */
+    PKEY_NOKEY,                  /* 0x9c CTRL-SHIFT-, */
+    PKEY_NOKEY,                  /* 0x9d CTRL-= */
+    PKEY_NOKEY,                  /* 0x9e CTRL-SHIFT-. */
+    PKEY_NOKEY,                  /* 0x9f CTRL-SHIFT-/ */
+
+    PKEY_NOKEY,                  /* 0xa0 CTRL-SHIFT-2 */
+    PKEY_NOKEY,                  /* 0xa1 CTRL-SHIFT-A */
+    PKEY_BACK1,                  /* 0xa2 CTRL-SHIFT-B */
+    PKEY_COPY1,                  /* 0xa3 CTRL-SHIFT-C */
+    PKEY_DATA1,                  /* 0xa4 CTRL-SHIFT-D */
+    PKEY_EDIT1,                  /* 0xa5 CTRL-SHIFT-E */
+    PKEY_FONT,                  /* 0xa6 CTRL-SHIFT-F */
+    PKEY_NOKEY,                  /* 0xa7 CTRL-SHIFT-G */
+    PKEY_HELP1,                  /* 0xa8 CTRL-SHIFT-H */
+    PKEY_NOKEY,                  /* 0xa9 CTRL-SHIFT-I */
+    PKEY_NOKEY,                  /* 0xaa CTRL-SHIFT-J */
+    PKEY_NOKEY,                  /* 0xab CTRL-SHIFT-K */
+    PKEY_LAB1,                  /* 0xac CTRL-SHIFT-L */
+    PKEY_NOKEY,                  /* 0xad CTRL-SHIFT-M */
+    PKEY_NOKEY,                  /* 0xae CTRL-SHIFT-N */
+    PKEY_NOKEY,                  /* 0xaf CTRL-SHIFT-O */
+
+    PKEY_SUPER1,                  /* 0xb0 CTRL-SHIFT-P */
+    PKEY_ACCESS,                  /* 0xb1 CTRL-SHIFT-Q */
+    PKEY_ERASE1,                  /* 0xb2 CTRL-SHIFT-R */
+    PKEY_STOP1,                  /* 0xb3 CTRL-SHIFT-S */
+    PKEY_TERM,                  /* 0xb4 CTRL-SHIFT-T */
+    PKEY_NOKEY,                  /* 0xb5 CTRL-SHIFT-U */
+    PKEY_NOKEY,                  /* 0xb6 CTRL-SHIFT-V */
+    PKEY_NOKEY,                  /* 0xb7 CTRL-SHIFT-W */
+    PKEY_NOKEY,                  /* 0xb8 CTRL-SHIFT-X */
+    PKEY_SUB1,                  /* 0xb9 CTRL-SHIFT-Y */
+    PKEY_NOKEY,                  /* 0xba CTRL-SHIFT-Z */
+    PKEY_NOKEY,                  /* 0xbb CTRL-[ */
+    PKEY_NOKEY,                  /* 0xbc CTRL-\ */
+    PKEY_NOKEY,                  /* 0xbd CTRL-] */
+    PKEY_NOKEY,                  /* 0xbe CTRL-SHIFT-6 */
+    PKEY_NOKEY,                  /* 0xbf CTRL-SHIFT-_ */
+
+    PKEY_a,                      /* 0xc0 LEFT ARROW */
+    PKEY_NOKEY,                  /* 0xc1 ALT-LEFT ARROW */
+    PKEY_NOKEY,                  /* 0xc2 CTRL-LEFT ARROW */
+    PKEY_NOKEY,                  /* 0xc3 CTRL-ALT-LEFT ARROW */
+    PKEY_A,                      /* 0xc4 SHIFT-LEFT ARROW */
+    PKEY_NOKEY,                  /* 0xc5 SHIFT-ALT LEFT ARROW */
+    PKEY_NOKEY,                  /* 0xc6 SHIFT-CTRL-LEFT ARROW */
+    PKEY_NOKEY,                  /* 0xc7 SHIFT-CTRL-ALT-LEFT ARROW */
+    PKEY_d,                      /* 0xc8 RIGHT ARROW */
+    PKEY_NOKEY,                  /* 0xc9 ALT-RIGHT ARROW */
+    PKEY_NOKEY,                  /* 0xca CTRL-RIGHT ARROW */
+    PKEY_NOKEY,                  /* 0xcb CTRL-ALT-RIGHT ARROW */
+    PKEY_D,                      /* 0xcc SHIFT-RIGHT ARROW */
+    PKEY_NOKEY,                  /* 0xcd SHIFT-ALT-RIGHT ARROW */
+    PKEY_NOKEY,                  /* 0xce SHIFT-CTRL-RIGHT ARROW */
+    PKEY_NOKEY,                  /* 0xcf SHIFT-CTRL-ALT-RIGHT ARROW */
+
+    PKEY_w,                      /* 0xd0 UP ARROW */
+    PKEY_NOKEY,                  /* 0xd1 ALT-UP ARROW */
+    PKEY_NOKEY,                  /* 0xd2 CTRL-UP ARROW */
+    PKEY_NOKEY,                  /* 0xd3 ALT-CTRL-UP ARROW */
+    PKEY_W,                      /* 0xd4 SHIFT-UP ARROW */
+    PKEY_NOKEY,                  /* 0xd5 SHIFT-ALT UP ARROW */
+    PKEY_NOKEY,                  /* 0xd6 SHIFT-CTRL-UP ARROW */
+    PKEY_NOKEY,                  /* 0xd7 SHIFT-CTRL-ALT-UP ARROW */
+    PKEY_x,                      /* 0xd8 DOWN ARROW */
+    PKEY_NOKEY,                  /* 0xd9 ALT-DOWN ARROW */
+    PKEY_NOKEY,                  /* 0xda CTRL-DOWN ARROW */
+    PKEY_NOKEY,                  /* 0xdb ALT-CTRL-DOWN ARROW */
+    PKEY_X,                      /* 0xdc SHIFT-DOWN ARROW */
+    PKEY_NOKEY,                  /* 0xdd SHIFT-ALT-DOWN ARROW */
+    PKEY_NOKEY,                  /* 0xde SHIFT-CTRL-DOWN ARROW */
+    PKEY_NOKEY,                  /* 0xdf SHIFT-CTRL-ALT-DOWN ARROW */
+
+    PKEY_NOKEY,                  /* 0xe0 CAPS LOCK */
+    PKEY_NOKEY,                  /* 0xe1 ALT CAPS LOCK */
+    PKEY_NOKEY,                  /* 0xe2 CTRL CAPS LOCK */
+    PKEY_NOKEY,                  /* 0xe3 ALT CTRL CAPS LOCK */
+    PKEY_NOKEY,                  /* 0xe4 SHIFT CAPS LOCK */
+    PKEY_NOKEY,                  /* 0xe5 SHIFT ALT CAPS LOCK */
+    PKEY_NOKEY,                  /* 0xe6 SHIFT CTRL CAPS LOCK */
+    PKEY_NOKEY,                  /* 0xe7 SHIFT CTRL ALT CAPS LOCK */
+    PKEY_NOKEY,                  /* 0xe8 F1 */
+    PKEY_NOKEY,                  /* 0xe9 CTRL-F1 */
+    PKEY_NOKEY,                  /* 0xea SHIFT-F1 */
+    PKEY_NOKEY,                  /* 0xeb CTRL-SHIFT-F1 */
+    PKEY_NOKEY,                  /* 0xec F2 */
+    PKEY_NOKEY,                  /* 0xed CTRL-F2 */
+    PKEY_NOKEY,                  /* 0xee SHIFT-F2 */
+    PKEY_NOKEY,                  /* 0xef CTRL-SHIFT-F2 */
+
+    PKEY_NOKEY,                  /* 0xf0 F3 */
+    PKEY_NOKEY,                  /* 0xf1 CTRL-F3 */
+    PKEY_NOKEY,                  /* 0xf2 SHIFT-F3 */
+    PKEY_NOKEY,                  /* 0xf3 CTRL-SHIFT-F3 */
+    PKEY_NOKEY,                  /* 0xf4 F4 */
+    PKEY_NOKEY,                  /* 0xf5 CTRL-F4 */
+    PKEY_NOKEY,                  /* 0xf6 SHIFT-F4 */
+    PKEY_NOKEY,                  /* 0xf7 CTRL-SHIFT-F4 */
+    PKEY_NOKEY,                  /* 0xf8 F5 */
+    PKEY_NOKEY,                  /* 0xf9 CTRL-F5 */
+    PKEY_NOKEY,                  /* 0xfa SHIFT-F5 */
+    PKEY_NOKEY,                  /* 0xfb CTRL-SHIFT-F5 */
+    PKEY_BACKSPACE,              /* 0xfc SHIFT-SPACE */
+    PKEY_NOKEY,                  /* 0xfd SHIFT-TAB */
+    PKEY_NEXT1,                  /* 0xfe SHIFT-ENTER */
+    PKEY_NOKEY,                  /* 0xff ALT */
 };
 
 #endif /* KEY_H */

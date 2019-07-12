@@ -12,6 +12,7 @@
 #include "protocol.h"
 #include "keyboard.h"
 #include "io.h"
+#include "key.h"
 
 extern chanid_t win;
 
@@ -23,6 +24,17 @@ extern chanid_t win;
  */
 void keyboard_out(unsigned char platoKey)
 {
+  if (platoKey==0xff)
+    return;
+  
+  if (platoKey>0x7F)
+    {
+      Key(ACCESS);
+      Key(ACCESS_KEYS[platoKey-0x80]);
+      return;
+    }
+  Key(platoKey);
+  return;
 }
 
 /**
@@ -33,20 +45,19 @@ void keyboard_main(void)
   char ch;
   int ret;
   char buff[8];
-  ret=io_fbyte(win,0,&ch);
-  if (ret==0)
-    {
-      if (ch==0x0a)
-      	ch=0x0d;
-      io_send_byte(ch);
-    }
-}
 
-/**
- * keyboard_clear() - Clear the keyboard buffer
- */
-void keyboard_clear(void)
-{
+  if (io_pend(win,0)==0)
+    {
+      ret=io_fbyte(win,0,&ch);
+      
+      if (ret==0)
+	{
+	  if (TTY)
+	    keyboard_out_tty(ch);
+	  else
+	    keyboard_out(key_to_pkey[ch]);
+	}
+    }
 }
 
 /**
@@ -54,4 +65,8 @@ void keyboard_clear(void)
  */
 void keyboard_out_tty(char ch)
 {
+  if (ch==0x0a)
+    ch=0x0d;
+  
+  io_send_byte(ch);
 }
