@@ -145,7 +145,7 @@ unsigned char key_to_pkey[]={
     PKEY_ERASE, /* 0x7f DEL */
 };
 
-unsigned char shiftlock_key_to_pkey[]={
+unsigned char shift_key_to_pkey[]={
     PKEY_NOKEY, /* 0x00 NUL */
     PKEY_ANS, /* 0x01 CTRL-A */
     PKEY_BACK, /* 0x02 CTRL-B */

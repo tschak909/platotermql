@@ -47,8 +47,6 @@ void screen_init(void)
   char hello[5]="Hello";
   win=io_open("CON_512x256a0x0",0);
 
-  ret=sd_fount(win,-1,(char*)font,(char*)font);
-
   sd_setin(win,0,7);
   sd_clear(win,0);
   screen_splash();
@@ -115,16 +113,22 @@ void screen_block_draw(padPt* Coord1, padPt* Coord2)
   colour_t c;
 
   screen_set_pen_mode();
+
   if (CurMode==ModeInverse || CurMode==ModeErase)
     c=0;
   else
     c=7;
 
-  r.q_x=min(scalex[Coord1->x],scalex[Coord2->x]);
-  r.q_y=min(scaley[Coord1->y],scalex[Coord2->y]);
-  r.q_width=max(scalex[(Coord2->x-Coord1->x)], scalex[Coord1->x-Coord2->x]);
-  r.q_height=max(scaley[(Coord2->y-Coord1->x)], scaley[Coord2->y-Coord1->y]);
+  // Quantise coords to pixel positions to calculate rect.
+  Coord1->y^=0x1FF;
+  Coord2->y^=0x1FF;
+  Coord1->y>>=1;
+  Coord2->y>>=1;
   
+  r.q_x=Coord1->x;
+  r.q_y=Coord1->y;
+  r.q_width=(Coord2->x)-(Coord1->x);
+  r.q_height=(Coord2->y)-(Coord1->y);
   sd_fill(win,-1,c,&r);
 }
 

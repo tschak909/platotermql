@@ -8,6 +8,7 @@
  */
 
 #include <qdos.h>
+#include <stdio.h>
 #include "protocol.h"
 #include "keyboard.h"
 #include "io.h"
@@ -31,11 +32,12 @@ void keyboard_main(void)
 {
   char ch;
   int ret;
+  char buff[8];
   ret=io_fbyte(win,0,&ch);
   if (ret==0)
     {
       if (ch==0x0a)
-	ch=0x0d;
+      	ch=0x0d;
       io_send_byte(ch);
     }
 }
